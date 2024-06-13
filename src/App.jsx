@@ -32,6 +32,8 @@ function App() {
       const [removedTask] = newTasksArr.splice(handleTaskIndex, 1);
       newTasksArr.push(removedTask)
       setTasks(newTasksArr)
+      setColumnId(undefined);
+      setTaskId(undefined);
     }
 
   }, [handleTaskId, handleColumnId])

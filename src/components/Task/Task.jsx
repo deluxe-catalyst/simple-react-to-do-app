@@ -7,7 +7,7 @@ export default function Task({title, description, date, id, handleDragTask}){
         <div 
             className={classes.task}
             draggable="true"
-            onDragStart={() => handleDragTask(id)}
+            onDragEnd={() => handleDragTask(id)}
         >
             <h1>{title}</h1>
             <h2>{description}</h2>
