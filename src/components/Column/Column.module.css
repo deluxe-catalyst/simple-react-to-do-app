@@ -59,6 +59,10 @@ img{
     background-color: rgba(135, 135, 135, 0.1);
     border-radius: 12px;
     margin: 0;
-    padding: 10px;
+    padding: 16px;
+    box-sizing: border-box;
     font-family: 'Montserrat', serif;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
