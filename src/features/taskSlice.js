@@ -67,13 +67,16 @@ const tasksSlice = createSlice({
             state.handleColumndId = action.payload;
         },
         updateTasks(state) {
-            const taskIndex = state.tasks.findIndex(task => task.id === state.handleTaskId);
-            state.tasks[taskIndex].columnId = state.handleColumndId;
-            const [removedTask] = state.tasks.splice(taskIndex, 1);
-            state.tasks.push(removedTask)
+            if (state.handleTaskId  && state.handleColumndId)  {
+                const taskIndex = state.tasks.findIndex(task => task.id === state.handleTaskId);
+                state.tasks[taskIndex].columnId = state.handleColumndId;
+                const [removedTask] = state.tasks.splice(taskIndex, 1);
+                state.tasks.push(removedTask)
+    
+                state.handleColumndId = undefined;
+                state.handleTaskId = undefined;
+            }
 
-            state.handleColumndId = undefined;
-            state.handleTaskId = undefined;
         }
     }
 })

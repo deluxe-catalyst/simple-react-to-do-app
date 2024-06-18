@@ -6,6 +6,13 @@
     border-radius: 16px;
 }
 
+
+a{
+    color: inherit !important;
+    text-decoration: none !important;
+    width: 100%;
+}
+
 .task h1{
     font-family: 'Montserrat',serif;
     font-size: 30px;

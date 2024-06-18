@@ -1,30 +1,21 @@
 
-import { useSelector } from 'react-redux';
-import Header from './components/Header/Header'
-import Column from './components/Column/Column'
-import './App.css'
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Taskpage from './components/Taskpage/Taskpage';
+import Homepage from './components/Homepage/Homepage'
+
 
 function App() {
 
-  const columns = useSelector((state)  => state.columns.columnsData);
-  const tasks = useSelector((state) => state.tasks.tasks);
-
   return (
     <>
-
-        <Header />
-        <main>
-          {columns.map((column) => (
-            <Column
-              key={column.columnId}
-              columnTitle={column.columnTitle}
-              columnId={column.columnId}
-
-              tasksArr={tasks}
-            />
-          ))}
-
-        </main>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/task/:id" element={<Taskpage  />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
