@@ -1,63 +1,30 @@
-import { useEffect, useState } from 'react'
 
+import { useSelector } from 'react-redux';
 import Header from './components/Header/Header'
 import Column from './components/Column/Column'
-import columnsData from './assets/columns'
-import tasksData from './assets/tasks' 
-
 import './App.css'
 
 function App() {
 
-  const [columns, setColumns] = useState(columnsData)
-  const [tasks, setTasks] = useState(tasksData)
-
-  const [handleColumnId, setColumnId] = useState(undefined);
-  const [handleTaskId, setTaskId] = useState(undefined);
-   
-  function updColumnId(columnId){
-    setColumnId(columnId);
-  }
-
-  function updTaskId(taskId){
-    setTaskId(taskId);
-  }
-
-  
-  useEffect(() => {
-    if(handleColumnId && handleTaskId){
-      const newTasksArr = [...tasks]
-      const handleTaskIndex = newTasksArr.findIndex(task => task.id === handleTaskId)
-      newTasksArr[handleTaskIndex].columnId = handleColumnId;
-      const [removedTask] = newTasksArr.splice(handleTaskIndex, 1);
-      newTasksArr.push(removedTask)
-      setTasks(newTasksArr)
-      setColumnId(undefined);
-      setTaskId(undefined);
-    }
-
-  }, [handleTaskId, handleColumnId])
+  const columns = useSelector((state)  => state.columns.columnsData);
+  const tasks = useSelector((state) => state.tasks.tasks);
 
   return (
     <>
-          <Header/>
-          <main>
-            {columns.map((column) => (
-              <Column
-                key={column.columnId}
-                columnTitle={column.columnTitle}
-                columnId={column.columnId}
 
-                tasksArr = {tasks}
+        <Header />
+        <main>
+          {columns.map((column) => (
+            <Column
+              key={column.columnId}
+              columnTitle={column.columnTitle}
+              columnId={column.columnId}
 
-                // update = {updatedTasks}
+              tasksArr={tasks}
+            />
+          ))}
 
-                updTaskId = {updTaskId}
-                updColumnId = {updColumnId}
-              />
-            ))}
-            
-          </main>
+        </main>
     </>
   )
 }
