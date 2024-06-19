@@ -35,7 +35,7 @@ const initialState = {
             title: 'Задача 5',
             description: 'Описание задачи 5',
             date: '02.09.2024',
-            columnId: 'to-do'
+            columnId: 'in-process'
         },
         {
             id: 6,
@@ -52,7 +52,7 @@ const initialState = {
             columnId: 'to-do'
         },
     ],
-    handleColumndId: undefined,
+    handleColumnId: undefined,
     handleTaskId: undefined
 }
 
@@ -64,16 +64,18 @@ const tasksSlice = createSlice({
             state.handleTaskId = action.payload;
         },
         setColumnId(state, action) {
-            state.handleColumndId = action.payload;
+            state.handleColumnId = action.payload;
         },
         updateTasks(state) {
-            if (state.handleTaskId  && state.handleColumndId)  {
-                const taskIndex = state.tasks.findIndex(task => task.id === state.handleTaskId);
-                state.tasks[taskIndex].columnId = state.handleColumndId;
-                const [removedTask] = state.tasks.splice(taskIndex, 1);
-                state.tasks.push(removedTask)
-    
-                state.handleColumndId = undefined;
+            if (state.handleTaskId  && state.handleColumnId)  {
+                const updatedTasks = [...state.tasks];
+                const taskIndex = updatedTasks.findIndex(task => task.id === state.handleTaskId);
+                updatedTasks[taskIndex].columnId = state.handleColumnId;
+                const [removedTask] = updatedTasks.splice(taskIndex,  1);
+                updatedTasks.push(removedTask)
+                
+                state.tasks  = updatedTasks;
+                state.handleColumnId = undefined;
                 state.handleTaskId = undefined;
             }
 
