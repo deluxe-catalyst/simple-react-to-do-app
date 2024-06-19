@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ColumnStateInterface } from "@/types/interfaces";
 
-const initialState = {
+const initialState : ColumnStateInterface = {
     columnsData: [
         {
             columnTitle: 'Выполнить',
@@ -20,6 +21,7 @@ const initialState = {
 const columnsSlice = createSlice({
     name: 'columns',
     initialState,
+    reducers: {}
 })
 
 export default columnsSlice.reducer;

@@ -4,14 +4,20 @@ import Task from '../Task/Task';
 
 import { updateTasks, setColumnId, setTaskId, } from '@/features/taskSlice';
 import { useDispatch } from 'react-redux';
+import { TaskInterface } from '@/types/interfaces';
 
+interface ColumnProps{
+  columnTitle : string,
+  columnId : string,
+  tasksArr : TaskInterface[],
+}
 
-export default function Column({ columnTitle, columnId, tasksArr }) {
+export default function Column({ columnTitle, columnId, tasksArr } : ColumnProps) {
 
-  const columnArr = [];
+  const TASKS_IN_COLUMN_ARRAY : TaskInterface[] = [];
   const dispatch = useDispatch();
 
-  function changeColumnId(taskId) {
+  function changeColumnId(taskId : Number) {
     dispatch(setTaskId(taskId));
     dispatch(updateTasks());
   }
@@ -20,9 +26,9 @@ export default function Column({ columnTitle, columnId, tasksArr }) {
     dispatch(setColumnId(columnId));
   }
 
-  tasksArr.forEach(task => {
-    if (task.columnId == columnId) {
-      columnArr.push(task);
+  tasksArr.forEach((task : TaskInterface) => {
+    if (task.columnId === columnId) {
+      TASKS_IN_COLUMN_ARRAY.push(task);
     }
   });
 
@@ -38,7 +44,7 @@ export default function Column({ columnTitle, columnId, tasksArr }) {
       </div>
       <div className={classes.line}></div>
       <div className={classes.column__taskbox}>
-        {columnArr && columnArr.map((task) => (
+        {TASKS_IN_COLUMN_ARRAY && TASKS_IN_COLUMN_ARRAY.map((task) => (
           <Task
             key={task.id}
             id={task.id}
@@ -49,7 +55,7 @@ export default function Column({ columnTitle, columnId, tasksArr }) {
             handleDragTask={changeColumnId}
           />
         ))}
-        {columnArr.length == 0 && <h1 className={classes.empty}>Перетащите задачу сюда</h1>}
+        {TASKS_IN_COLUMN_ARRAY.length == 0 && <h1 className={classes.empty}>Перетащите задачу сюда</h1>}
       </div>
     </div>
   );

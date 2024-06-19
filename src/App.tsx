@@ -2,9 +2,9 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Taskpage from './components/Taskpage/Taskpage';
-import Homepage from './components/Homepage/Homepage'
-
+import Taskpage from './components/Taskpage/Taskpage.tsx';
+import Homepage from './components/Homepage/Homepage.tsx'
+import Page404 from './components/Page404/Page404.tsx'
 
 function App() {
 
@@ -14,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/task/:id" element={<Taskpage  />} />
+          <Route path="*" element={<Page404  />} />
         </Routes>
       </BrowserRouter>
     </>

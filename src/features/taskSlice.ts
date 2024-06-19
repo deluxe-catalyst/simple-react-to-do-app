@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { TaskStateInterface } from "@/types/interfaces";
 
-const initialState = {
+const initialState : TaskStateInterface = {
     tasks: [
         {
             id: 1,
@@ -21,35 +22,28 @@ const initialState = {
             title: 'Задача 3',
             description: 'Описание задачи 3',
             date: '20.08.2024',
-            columnId: 'done'
+            columnId: 'to-do'
         },
         {
             id: 4,
             title: 'Задача 4',
             description: 'Описание задачи 4',
             date: '02.05.2024',
-            columnId: 'done'
+            columnId: 'in-process'
         },
         {
             id: 5,
             title: 'Задача 5',
             description: 'Описание задачи 5',
             date: '02.09.2024',
-            columnId: 'in-process'
+            columnId: 'to-do'
         },
         {
             id: 6,
             title: 'Задача 6',
             description: 'Описание задачи 6',
             date: '02.09.2025',
-            columnId: 'to-do'
-        },
-        {
-            id: 7,
-            title: 'Задача 7',
-            description: 'Описание задачи 7',
-            date: '02.04.2024',
-            columnId: 'to-do'
+            columnId: 'in-process'
         },
     ],
     handleColumnId: undefined,
@@ -72,7 +66,7 @@ const tasksSlice = createSlice({
                 const taskIndex = updatedTasks.findIndex(task => task.id === state.handleTaskId);
                 updatedTasks[taskIndex].columnId = state.handleColumnId;
                 const [removedTask] = updatedTasks.splice(taskIndex,  1);
-                updatedTasks.push(removedTask)
+                updatedTasks.push(removedTask);
                 
                 state.tasks  = updatedTasks;
                 state.handleColumnId = undefined;
